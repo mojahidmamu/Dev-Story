@@ -20,8 +20,8 @@ const DashboardLayout = ({ children }) => {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-5">
-            <ul className="space-y-3">
+          <nav className="flex-1 px-4">
+            <ul className="space-y-1">
               <li>
                 <Link
                   href="/dashboard"
@@ -79,7 +79,7 @@ const DashboardLayout = ({ children }) => {
         {/* Main Content */}
         <main className="col-span-9 p-8">
           {/* Top Bar */}
-          <div className="mb-8 flex items-center justify-between rounded-2xl bg-white p-6 shadow">
+          <div className="mb-4 flex items-center justify-between rounded-2xl bg-white p-6 shadow">
             <div>
               <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
 
@@ -88,8 +88,8 @@ const DashboardLayout = ({ children }) => {
               </p>
             </div>
 
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">
-              A
+            <div className="flex p-2 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">
+              Mojahid
             </div>
           </div>
 
