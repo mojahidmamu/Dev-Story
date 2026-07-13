@@ -130,6 +130,7 @@ const ShowDetails = async ({ params }) => {
   const singleStory = developerStories.find(
     (story) => story.id === parseInt(id),
   );
+  
   if (!singleStory) {
     return (
       <div className="flex min-h-screen items-center justify-center">
