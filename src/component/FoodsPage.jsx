@@ -1,5 +1,7 @@
 import Link from "next/link";
 import React from "react";
+import CardButton from "./buttons/CardButton";
+import FoodHeader from "./buttons/FoodHeader";
 
 const FoodsPage = async () => {
   const res = await fetch(
@@ -12,9 +14,8 @@ const FoodsPage = async () => {
 
   return (
     <div className="max-w-7xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-8">
-        Total Foods: {data.foods.length}
-      </h1>
+      {/* Title and added card */}
+      <FoodHeader totalFoods={data.foods.length} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.foods.map((food) => (
@@ -43,12 +44,16 @@ const FoodsPage = async () => {
                 </p>
               </div>
 
-              <Link
-                href={`/foods/${food.id}`}
-                className="inline-block mt-5 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600"
-              >
-                View Details
-              </Link>
+              <div className="mt-5 flex justify-around items-center">
+                <Link
+                  href={`/foods/${food.id}`}
+                  className="rounded-lg bg-orange-500 px-4 py-2 text-white transition hover:bg-orange-600"
+                >
+                  View Details
+                </Link>
+
+                <CardButton food={food} />
+              </div>
             </div>
           </div>
         ))}
