@@ -28,10 +28,9 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         {/* Header */}
         <Header></Header>
-        <CartProvider>
-          <main className="flex-1 flex flex-col px-4 py-8">{children}</main>
-        </CartProvider>
-
+        <main className="flex-1 flex flex-col px-4 py-8">
+          <CartProvider>{children}</CartProvider>
+        </main>
         {/* Footer */}
         <Footer></Footer>
       </body>

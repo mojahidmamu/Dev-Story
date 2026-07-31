@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import CardButton from "./buttons/CardButton";
 import FoodHeader from "./buttons/FoodHeader";
+import InputSearch from "./InputSearch";
 
 const FoodsPage = async () => {
   const res = await fetch(
@@ -16,6 +17,10 @@ const FoodsPage = async () => {
     <div className="max-w-7xl mx-auto p-8">
       {/* Title and added card */}
       <FoodHeader totalFoods={data.foods.length} />
+
+      <div className="mt-2">
+        <InputSearch></InputSearch>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.foods.map((food) => (
