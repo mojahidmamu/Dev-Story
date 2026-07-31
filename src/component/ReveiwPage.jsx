@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+const currentUser = "current-user@mail.com";
 
 const ReviewPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -12,6 +13,23 @@ const ReviewPage = () => {
         setReviews(data.reviews);
       });
   }, []);
+
+  const handleLike = (id) => {
+    setReviews((prev) =>
+      prev.map((review) => {
+        if (review.id !== id) return review;
+
+        const liked = review.likes.includes(currentUser);
+
+        return {
+          ...review,
+          likes: liked
+            ? review.likes.filter((email) => email !== currentUser)
+            : [...review.likes, currentUser],
+        };
+      }),
+    );
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 py-12">
@@ -58,12 +76,21 @@ const ReviewPage = () => {
               </div>
 
               {/* Review */}
-              <p className="mt-4   leading-7 text-gray-600">
-                {review.review}
-              </p>
+              <p className="mt-4   leading-7 text-gray-600">{review.review}</p>
 
               {/* Footer */}
               <div className="mt-6 flex items-center justify-between border-t pt-4">
+                <button
+                  onClick={() => handleLike(review.id)}
+                  className={`flex items-center gap-2 rounded-full px-4 py-2 transition ${
+                    review.likes.includes(currentUser)
+                      ? "bg-pink-600 text-white"
+                      : "bg-pink-100 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  }`}
+                >
+                  {review.likes.includes(currentUser) ? "❤️ Liked" : "🤍 Like"}
+                </button>
+
                 <div>
                   <p className="text-sm text-gray-500">
                     ❤️ {review.likes.length} Likes
