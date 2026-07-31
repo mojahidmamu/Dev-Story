@@ -1,19 +1,85 @@
 "use client";
-import React, { useEffect, useState } from 'react';
 
-const ReveiwPage = () => {
-    const [reviews, setReviews] = useState();
-    useEffect( () => {
-        fetch("https://taxi-kitchen-api.vercel.app/api/v1/reviews")
-        .then(res => res.json())
-        .then(data =>  setReviews(data))
-    }, [])
+import { useEffect, useState } from "react";
 
-    return (
-        <div>
-            <h1>All Reviews here: {setReviews.length}</h1>
+const ReviewPage = () => {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetch("https://taxi-kitchen-api.vercel.app/api/v1/reviews")
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data.reviews);
+      });
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-slate-100 py-12">
+      <div className="mx-auto max-w-7xl px-5">
+        <h1 className="mb-10 text-center text-4xl font-bold">
+          Customer Reviews ({reviews.length})
+        </h1>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((review) => (
+            <div
+              key={review.id}
+              className="rounded-2xl bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+            >
+              {/* User */}
+              <div className="flex items-center gap-4">
+                <img
+                  src={review.photo}
+                  alt={review.user}
+                  className="h-16 w-16 rounded-full border-2 border-orange-400 object-cover"
+                />
+
+                <div>
+                  <h2 className="text-lg font-bold">{review.user}</h2>
+
+                  <p className="text-sm text-gray-500">{review.email}</p>
+                </div>
+              </div>
+
+              {/* Rating */}
+              <div className="mt-4 flex">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span
+                    key={star}
+                    className={`text-xl ${
+                      star <= review.rating
+                        ? "text-yellow-400"
+                        : "text-gray-300"
+                    }`}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+
+              {/* Review */}
+              <p className="mt-4   leading-7 text-gray-600">
+                {review.review}
+              </p>
+
+              {/* Footer */}
+              <div className="mt-6 flex items-center justify-between border-t pt-4">
+                <div>
+                  <p className="text-sm text-gray-500">
+                    ❤️ {review.likes.length} Likes
+                  </p>
+                </div>
+
+                <div className="text-sm text-gray-500">
+                  {new Date(review.date).toLocaleDateString()}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
-export default ReveiwPage;
+export default ReviewPage;
