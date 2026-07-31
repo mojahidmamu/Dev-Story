@@ -4,7 +4,7 @@ import React from 'react';
 const NotFound404 = () => {
     return (
         <div className='flex justify-center items-center flex-col gap-3 '>
-            <h1>404 | Your Page Not Found MOJO</h1>
+            <h1>404 | Your Page Not Found  <span className='font-bold underline'>ABDULLAH ALL MOJAHID</span> </h1>
             <Link href={"/"} className='underline'>Go to Home</Link>
         </div>
     );
