@@ -39,7 +39,6 @@ const Header = () => {
               Stories
             </a>
           </li>
-        
         </ul>
       </nav>
 
