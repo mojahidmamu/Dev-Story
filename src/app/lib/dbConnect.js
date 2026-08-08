@@ -17,3 +17,5 @@ export const connect = (collection) => {
     const db = client.db(process.env.DB_NAME);
     return db.collection(collection); 
 }
+
+
