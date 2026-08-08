@@ -12,6 +12,6 @@ export async function GET(request, { params }) {
   return Response.json({
     status: 200,
     message: "Feedback retrieved successfully",
-    data: singleFeedback || feedbackFromDB,
+    data: singleFeedback || feedbackFromDB, 
   });
 }
