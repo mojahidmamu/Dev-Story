@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 const currentUser = "current-user@mail.com";
 
@@ -46,10 +47,18 @@ const ReviewPage = () => {
             >
               {/* User */}
               <div className="flex items-center gap-4">
-                <img
+                {/* <img
                   src={review.photo}
                   alt={review.user}
                   className="h-16 w-16 rounded-full border-2 border-orange-400 object-cover"
+                /> */}
+
+                <Image
+                  src={review.photo}
+                  alt={review.user}
+                  className="h-16 w-16 rounded-full border-2 border-orange-400 object-cover"
+                  width={64}
+                  height={64}
                 />
 
                 <div>

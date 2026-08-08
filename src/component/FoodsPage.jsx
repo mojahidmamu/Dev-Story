@@ -2,6 +2,7 @@ import Link from "next/link";
 import FoodHeader from "./buttons/FoodHeader";
 import InputSearch from "./InputSearch";
 import CardButton from "./buttons/CardButton";
+import Image from "next/image";
 
 const FoodsPage = async ({ searchParams }) => {
   const res = await fetch(
@@ -35,11 +36,21 @@ const FoodsPage = async ({ searchParams }) => {
             key={food.id}
             className="overflow-hidden rounded-xl border shadow-md"
           >
-            <img
+            {/* <img
+                src={food.foodImg}
+                alt={food.title}
+                className="h-56 w-full object-cover"
+            /> */}
+
+            <Image
               src={food.foodImg}
               alt={food.title}
               className="h-56 w-full object-cover"
+              width={400}
+              height={300}
             />
+
+
 
             <div className="p-5">
               <h2 className="text-xl font-bold">{food.title}</h2>
