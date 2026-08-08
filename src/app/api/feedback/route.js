@@ -5,10 +5,22 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const {message } = await request.json();
-  
+  const { message } = await request.json();
+  if (!message || typeof message != "string" ) {
+    return Response.json({
+      status: 400,
+      message: "Invalid feedback message",
+    });
+  }
+
+  const newFeedBack = { id: feedback.length + 1, message };    
+  feedback.push(newFeedBack);
+
   return Response.json({
-    status: 200,
-    data,
+    acknowledged: true , 
+    insertedId: newFeedBack.id,
+    status: 201,
+    message: "Feedback submitted successfully",
+    data: newFeedBack,
   });
 }
