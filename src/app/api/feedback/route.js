@@ -1,26 +1,30 @@
-import { feedback } from "../route";
+import { connect } from "@/app/lib/dbConnect";
 
-export async function GET(request) {
-  return Response.json(feedback);
-}
+export async function GET() {
+  try {
+    const feedbackCollection = await connect("feedback");
 
-export async function POST(request) {
-  const { message } = await request.json();
-  if (!message || typeof message != "string" ) {
+    const feedback = await feedbackCollection
+      .find({})
+      .sort({ createdAt: -1 })
+      .toArray();
+
     return Response.json({
-      status: 400,
-      message: "Invalid feedback message",
+      status: 200,
+      message: "Feedback retrieved successfully",
+      data: feedback,
     });
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      {
+        status: 500,
+        message: "Failed to retrieve feedback",
+      },
+      {
+        status: 500,
+      },
+    );
   }
-
-  const newFeedBack = { id: feedback.length + 1, message };    
-  feedback.push(newFeedBack);
-
-  return Response.json({
-    acknowledged: true , 
-    insertedId: newFeedBack.id,
-    status: 201,
-    message: "Feedback submitted successfully",
-    data: newFeedBack,
-  });
 }
